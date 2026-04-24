@@ -17,7 +17,7 @@ const QuizSchema = z.object({
   })).min(1, 'At least one question is required'),
 })
 
-export async function createQuiz(data: any) {
+export async function createQuiz(data: z.infer<typeof QuizSchema>) {
   const session = await getSession()
   if (!session || (session.role !== 'TEACHER' && session.role !== 'ADMIN')) {
     throw new Error('Unauthorized')
@@ -67,7 +67,7 @@ export async function submitAttempt({ quizId, userId, answers }: { quizId: strin
   if (!quiz) throw new Error('Quiz not found')
 
   let correctCount = 0
-  quiz.questions.forEach(q => {
+  quiz.questions.forEach((q: { id: string; correctAnswer: string }) => {
     if (answers[q.id] === q.correctAnswer) {
       correctCount++
     }
