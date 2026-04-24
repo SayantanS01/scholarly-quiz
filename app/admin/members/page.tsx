@@ -3,11 +3,26 @@ import RoleSelector from './RoleSelector'
 import { resetPassword, deleteUser } from '@/app/actions/admin'
 import TokenGenerator from './TokenGenerator'
 import MemberActions from './MemberActions'
+import Link from 'next/link'
+import { Role } from '@prisma/client'
 
-export default async function MembersPage() {
+type Props = {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}
+
+export default async function MembersPage({ searchParams }: Props) {
+  const resolvedParams = await searchParams;
+  const roleFilter = resolvedParams.role as string | undefined;
+  
+  const where = roleFilter && roleFilter !== 'ALL' ? { role: roleFilter as Role } : {};
+
   const users = await prisma.user.findMany({
+    where,
     orderBy: { createdAt: 'desc' },
   })
+
+  const tabs = ['ALL', 'ADMIN', 'TEACHER', 'STUDENT'];
+  const currentTab = roleFilter || 'ALL';
 
   return (
     <div className="max-w-6xl mx-auto">
@@ -21,6 +36,22 @@ export default async function MembersPage() {
         </div>
       </header>
 
+      <div className="flex gap-4 mb-6">
+        {tabs.map(t => (
+          <Link 
+            key={t}
+            href={`/admin/members${t === 'ALL' ? '' : `?role=${t}`}`}
+            className={`px-4 py-2 text-xs font-black tracking-widest uppercase border transition-all ${
+              currentTab === t 
+                ? 'border-primary text-primary bg-primary/10 shadow-[0_0_10px_var(--primary)]' 
+                : 'border-white/10 text-slate-500 hover:text-white hover:border-white/30'
+            }`}
+          >
+            {t}
+          </Link>
+        ))}
+      </div>
+
       <div className="card-panel panel-border overflow-hidden">
         <table className="w-full text-left">
           <thead>
@@ -32,23 +63,31 @@ export default async function MembersPage() {
             </tr>
           </thead>
           <tbody className="divide-y divide-white/5">
-            {users.map((user: any) => (
-              <tr key={user.id} className="hover:bg-white/5 transition-colors group">
-                <td className="px-8 py-6">
-                  <div className="font-black text-white uppercase group-hover:text-primary transition-colors">{user.name}</div>
-                  <div className="text-[9px] text-slate-500 font-mono tracking-widest uppercase mt-1">
-                    SYNCED: {new Date(user.createdAt).toLocaleDateString()}
-                  </div>
-                </td>
-                <td className="px-8 py-6 text-slate-400 font-mono text-xs">{user.email}</td>
-                <td className="px-8 py-6">
-                  <RoleSelector userId={user.id} currentRole={user.role} />
-                </td>
-                <td className="px-8 py-6 text-right flex flex-col items-end gap-2">
-                  <MemberActions userId={user.id} />
+            {users.length === 0 ? (
+              <tr>
+                <td colSpan={4} className="px-8 py-12 text-center text-slate-500 font-mono text-sm">
+                  NO_NODES_FOUND_FOR_QUERY
                 </td>
               </tr>
-            ))}
+            ) : (
+              users.map((user: any) => (
+                <tr key={user.id} className="hover:bg-white/5 transition-colors group">
+                  <td className="px-8 py-6">
+                    <div className="font-black text-white uppercase group-hover:text-primary transition-colors">{user.name}</div>
+                    <div className="text-[9px] text-slate-500 font-mono tracking-widest uppercase mt-1">
+                      SYNCED: {new Date(user.createdAt).toLocaleDateString()}
+                    </div>
+                  </td>
+                  <td className="px-8 py-6 text-slate-400 font-mono text-xs">{user.email}</td>
+                  <td className="px-8 py-6">
+                    <RoleSelector userId={user.id} currentRole={user.role} />
+                  </td>
+                  <td className="px-8 py-6 text-right flex flex-col items-end gap-2">
+                    <MemberActions userId={user.id} />
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>
