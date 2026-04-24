@@ -64,13 +64,14 @@ export async function login(prevState: any, formData: FormData) {
 
   await createSession(user.id, user.role)
 
-  const redirectPath = {
+  const redirectPathMap = {
     ADMIN: '/admin',
     TEACHER: '/teacher',
     STUDENT: '/student',
-  }[user.role]
+  }
+  const role = user.role as keyof typeof redirectPathMap
 
-  redirect(redirectPath)
+  redirect(redirectPathMap[role])
 }
 
 export async function logout() {
