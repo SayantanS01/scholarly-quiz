@@ -1,11 +1,12 @@
 'use client'
 
-import { useActionState } from 'react'
+import { useActionState, useState } from 'react'
 import { signup } from '@/app/actions/auth'
 import Link from 'next/link'
 
 export default function SignupPage() {
   const [state, action, pending] = useActionState(signup, undefined)
+  const [role, setRole] = useState('STUDENT')
 
   return (
     <div className="min-h-screen flex items-center justify-center px-6 bg-cyber-black">
@@ -56,13 +57,28 @@ export default function SignupPage() {
             <label className="block text-[10px] font-black text-neon-cyan mb-2 uppercase tracking-[0.2em]">NODE_TYPE</label>
             <select 
               name="role" 
+              value={role}
+              onChange={(e) => setRole(e.target.value)}
               className="w-full px-4 py-4 bg-black border border-slate-800 text-white font-mono text-sm focus:border-neon-cyan outline-none transition-all appearance-none"
-              defaultValue="STUDENT"
             >
               <option value="STUDENT">STUDENT_CORE</option>
               <option value="TEACHER">INSTRUCTOR_NODE</option>
             </select>
           </div>
+
+          {role === 'TEACHER' && (
+            <div className="animate-pulse">
+              <label className="block text-[10px] font-black text-neon-magenta mb-2 uppercase tracking-[0.2em]">INVITATION_TOKEN</label>
+              <input 
+                name="teacherToken" 
+                type="text" 
+                placeholder="X5-J9-B2"
+                className="w-full px-4 py-4 bg-black border border-neon-magenta text-neon-magenta font-mono text-sm focus:border-neon-magenta outline-none transition-all placeholder:text-neon-magenta/20"
+                required={role === 'TEACHER'}
+              />
+              <p className="text-[8px] text-neon-magenta/60 mt-1 font-mono uppercase tracking-widest">Admin-issued token required for instructor sync</p>
+            </div>
+          )}
 
           {state?.message && (
             <div className="p-4 bg-neon-magenta/10 border border-neon-magenta/50 text-neon-magenta text-xs font-bold uppercase tracking-widest">

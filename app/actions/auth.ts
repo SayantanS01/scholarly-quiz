@@ -26,6 +26,25 @@ export async function signup(prevState: any, formData: FormData) {
   }
 
   const { name, email, password, role } = validatedFields.data
+  const teacherToken = formData.get('teacherToken') as string
+
+  if (role === 'TEACHER') {
+    if (!teacherToken) return { message: 'Teacher token required' }
+    const validToken = await prisma.teacherToken.findFirst({
+      where: {
+        token: teacherToken.toUpperCase(),
+        expiresAt: { gt: new Date() },
+        isUsed: false
+      }
+    })
+    if (!validToken) return { message: 'Invalid or expired teacher token' }
+    
+    // Mark token as used
+    await prisma.teacherToken.update({
+      where: { id: validToken.id },
+      data: { isUsed: true }
+    })
+  }
 
   const existingUser = await prisma.user.findUnique({ where: { email } })
   if (existingUser) {

@@ -78,3 +78,11 @@ model Assignment {
   students  User[]    @relation("AssignedTo")
   createdAt DateTime  @default(now())
 }
+
+model TeacherToken {
+  id        String   @id @default(cuid())
+  token     String   @unique
+  expiresAt DateTime
+  isUsed    Boolean  @default(false)
+  createdAt DateTime @default(now())
+}

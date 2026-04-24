@@ -3,6 +3,25 @@
 import { prisma } from '@/lib/prisma'
 import { revalidatePath } from 'next/cache'
 import bcrypt from 'bcryptjs'
+import { getSession } from '@/lib/session'
+
+export async function generateTeacherToken() {
+  const session = await getSession()
+  if (!session || session.role !== 'ADMIN') throw new Error('Unauthorized')
+
+  const token = Math.random().toString(36).substring(2, 8).toUpperCase()
+  const expiresAt = new Date(Date.now() + 10 * 60 * 1000) // 10 minutes
+
+  await prisma.teacherToken.create({
+    data: {
+      token,
+      expiresAt,
+    }
+  })
+
+  revalidatePath('/admin/members')
+  return token
+}
 
 export async function updateRole(formData: FormData) {
   const userId = formData.get('userId') as string
