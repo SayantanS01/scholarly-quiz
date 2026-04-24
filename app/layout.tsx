@@ -3,8 +3,11 @@ import { ThemeProvider } from "../components/ThemeProvider";
 import { ThemeSwitcher } from "../components/ThemeSwitcher";
 
 export const metadata = {
-  title: "Scholarly Quiz",
+  title: "scholarly",
   description: "A quiz application",
+  icons: {
+    icon: "/icon.png",
+  },
 };
 
 export default function RootLayout({
