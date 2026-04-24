@@ -22,6 +22,7 @@ model User {
   updatedAt DateTime @updatedAt
 
   createdQuizzes     Quiz[]       @relation("CreatedBy")
+  createdAssignments Assignment[] @relation("CreatedAssignments")
   attempts           Attempt[]
   assignments        Assignment[] @relation("AssignedTo")
 }
@@ -66,10 +67,14 @@ model Attempt {
 }
 
 model Assignment {
-  id        String   @id @default(cuid())
-  quizId    String
-  quiz      Quiz     @relation(fields: [quizId], references: [id])
+  id        String    @id @default(cuid())
+  title     String?   // Optional title for the assignment
+  content   String?   // Optional content/instructions
+  quizId    String?   // Optional linked quiz
+  quiz      Quiz?     @relation(fields: [quizId], references: [id])
   dueDate   DateTime?
-  students  User[]   @relation("AssignedTo")
-  createdAt DateTime @default(now())
+  creatorId String
+  creator   User      @relation("CreatedAssignments", fields: [creatorId], references: [id])
+  students  User[]    @relation("AssignedTo")
+  createdAt DateTime  @default(now())
 }

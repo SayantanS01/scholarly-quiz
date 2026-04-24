@@ -18,7 +18,7 @@ export default async function LeaderboardPage() {
       avgScore: Math.round(avgScore),
       totalQuizzes: user.attempts.length
     }
-  }).sort((a, b) => b.avgScore - a.avgScore)
+  }).sort((a: any, b: any) => b.avgScore - a.avgScore)
 
   return (
     <div>
@@ -29,7 +29,7 @@ export default async function LeaderboardPage() {
 
       <div className="glass-panel cyber-border overflow-hidden">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-0 divide-y md:divide-y-0 md:divide-x divide-white/10 border-b border-white/10">
-          {leaderboard.slice(0, 3).map((user, i) => (
+          {leaderboard.slice(0, 3).map((user: any, i: number) => (
             <div key={user.name} className="p-12 text-center flex flex-col items-center group hover:bg-neon-cyan/5 transition-all">
               <div className={`text-6xl mb-6 transition-transform duration-500 ${i === 0 ? 'scale-125' : 'group-hover:scale-110'}`}>
                 {i === 0 ? '🥇' : i === 1 ? '🥈' : '🥉'}
@@ -54,7 +54,7 @@ export default async function LeaderboardPage() {
               </tr>
             </thead>
             <tbody className="divide-y divide-white/5">
-              {leaderboard.slice(3).map((user, i) => (
+              {leaderboard.slice(3).map((user: any, i: number) => (
                 <tr key={user.name} className="hover:bg-neon-magenta/5 transition-colors group">
                   <td className="py-6 px-4 text-slate-500 font-bold tracking-tighter">#{i + 4}</td>
                   <td className="py-6 px-4 font-black text-white group-hover:text-neon-magenta transition-colors uppercase">{user.name}</td>

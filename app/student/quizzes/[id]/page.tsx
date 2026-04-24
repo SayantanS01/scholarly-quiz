@@ -18,13 +18,13 @@ export default async function QuizPage({ params }: { params: { id: string } }) {
   if (!quiz) notFound()
 
   return (
-    <div className="max-w-4xl mx-auto py-10">
-      <header className="mb-10 text-center">
-        <h1 className="text-4xl font-black text-white mb-2">{quiz.title}</h1>
-        <p className="text-slate-400">Quiz by {quiz.creator.name}</p>
+    <div className="max-w-4xl mx-auto">
+      <header className="mb-12">
+        <h1 className="text-4xl font-black text-white mb-2 neon-text tracking-tighter uppercase">{quiz.title}</h1>
+        <p className="text-neon-cyan font-mono text-xs uppercase tracking-[0.3em]">INSTRUCTOR: {quiz.creator.name.toUpperCase()}</p>
       </header>
 
-      <QuizSession quiz={quiz} userId={session?.userId} />
+      <QuizSession quiz={quiz} userId={session?.userId as string} />
     </div>
   )
 }
