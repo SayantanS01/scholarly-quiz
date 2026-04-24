@@ -18,12 +18,12 @@ export function ThemeSwitcher() {
   }
 
   const themes = [
-    { name: "light", color: "#f8fafc", border: "#e2e8f0" },
-    { name: "dark", color: "#0f172a", border: "#1e293b" },
-    { name: "red", color: "#ff003c", border: "#b9002c" },
-    { name: "yellow", color: "#ffcc00", border: "#b38f00" },
-    { name: "green", color: "#00e676", border: "#00b35c" },
-    { name: "blue", color: "#0066ff", border: "#0047b3" },
+    { name: "light", color: "#ffffff", border: "#e4e4e7" },
+    { name: "dark", color: "#09090b", border: "#27272a" },
+    { name: "red", color: "#fef2f2", border: "#dc2626" },
+    { name: "yellow", color: "#fefce8", border: "#ca8a04" },
+    { name: "green", color: "#f0fdf4", border: "#16a34a" },
+    { name: "blue", color: "#eff6ff", border: "#2563eb" },
   ];
 
   return (

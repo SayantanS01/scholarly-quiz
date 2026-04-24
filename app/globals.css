@@ -34,22 +34,42 @@
 }
 
 [data-theme="red"] {
-  --primary: #ff003c;
+  --background: #fef2f2;
+  --foreground: #450a0a;
+  --card: #fee2e2;
+  --card-foreground: #7f1d1d;
+  --border: #fca5a5;
+  --primary: #dc2626;
   --primary-foreground: #ffffff;
 }
 
 [data-theme="yellow"] {
-  --primary: #ffcc00;
-  --primary-foreground: #000000;
+  --background: #fefce8;
+  --foreground: #422006;
+  --card: #fef9c3;
+  --card-foreground: #713f12;
+  --border: #fde047;
+  --primary: #ca8a04;
+  --primary-foreground: #ffffff;
 }
 
 [data-theme="green"] {
-  --primary: #00e676;
-  --primary-foreground: #000000;
+  --background: #f0fdf4;
+  --foreground: #052e16;
+  --card: #dcfce7;
+  --card-foreground: #14532d;
+  --border: #86efac;
+  --primary: #16a34a;
+  --primary-foreground: #ffffff;
 }
 
 [data-theme="blue"] {
-  --primary: #0066ff;
+  --background: #eff6ff;
+  --foreground: #172554;
+  --card: #dbeafe;
+  --card-foreground: #1e3a8a;
+  --border: #93c5fd;
+  --primary: #2563eb;
   --primary-foreground: #ffffff;
 }
 
