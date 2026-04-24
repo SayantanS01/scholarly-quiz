@@ -43,7 +43,7 @@ function StatCard({ title, value, icon, color }: { title: string; value: number;
   }
 
   return (
-    <div className={`p-8 cyber-border ${colors[color]} bg-black/40`}>
+    <div className={`p-8 panel-border ${colors[color]} bg-card/50`}>
       <div className="text-4xl mb-4">{icon}</div>
       <div className="text-sm font-medium opacity-70 mb-1 tracking-wider uppercase">{title}</div>
       <div className="text-4xl font-bold text-white">{value}</div>

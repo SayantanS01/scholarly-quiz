@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 export default function Home() {
   return (
-    <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-cyber-black">
+    <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-background">
       {/* Glitch Overlay */}
       <div className="absolute inset-0 pointer-events-none opacity-10 bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
       
@@ -12,9 +12,9 @@ export default function Home() {
         </div>
         
         <h1 className="text-7xl md:text-9xl font-black mb-8 tracking-tighter text-white">
-          <span className="neon-text text-neon-cyan">SCHOLARLY</span>
+          <span className="text-primary font-bold text-primary">SCHOLARLY</span>
           <br />
-          <span className="neon-text-magenta text-neon-magenta">QUIZ</span>
+          <span className="text-primary font-bold text-primary">QUIZ</span>
         </h1>
         
         <p className="max-w-2xl mx-auto text-lg md:text-xl text-slate-400 mb-12 font-mono uppercase tracking-widest">
@@ -23,10 +23,10 @@ export default function Home() {
         </p>
 
         <div className="flex flex-col md:flex-row gap-8 justify-center items-center">
-          <Link href="/login" className="btn-cyber text-lg px-12 py-4">
+          <Link href="/login" className="btn-primary text-lg px-12 py-4">
             INIT_SESSION
           </Link>
-          <Link href="/signup" className="px-8 py-3 border border-neon-magenta/50 text-neon-magenta font-mono text-xs tracking-[0.2em] hover:bg-neon-magenta hover:text-black transition-all">
+          <Link href="/signup" className="px-8 py-3 border border-primary text-primary font-mono text-xs tracking-[0.2em] hover:bg-primary/10 hover:text-black transition-all">
             [ CREATE_ENCRYPTED_ACCOUNT ]
           </Link>
         </div>
@@ -55,8 +55,8 @@ export default function Home() {
 
 function CyberCard({ title, description, label }: { title: string; description: string; label: string }) {
   return (
-    <div className="glass-panel p-8 cyber-border group hover:bg-neon-cyan/5 transition-all duration-500">
-      <div className="text-[10px] font-mono text-neon-cyan mb-4 opacity-50 group-hover:opacity-100">{label}</div>
+    <div className="card-panel p-8 panel-border group hover:bg-primary/10 transition-all duration-500">
+      <div className="text-[10px] font-mono text-primary mb-4 opacity-50 group-hover:opacity-100">{label}</div>
       <h3 className="text-2xl font-black mb-3 text-white tracking-tight">{title}</h3>
       <p className="text-slate-500 font-mono text-sm leading-relaxed group-hover:text-slate-300">{description}</p>
       <div className="mt-6 h-px w-0 bg-neon-cyan group-hover:w-full transition-all duration-700"></div>

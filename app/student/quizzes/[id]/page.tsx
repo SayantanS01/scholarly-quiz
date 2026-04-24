@@ -20,8 +20,8 @@ export default async function QuizPage({ params }: { params: { id: string } }) {
   return (
     <div className="max-w-4xl mx-auto">
       <header className="mb-12">
-        <h1 className="text-4xl font-black text-white mb-2 neon-text tracking-tighter uppercase">{quiz.title}</h1>
-        <p className="text-neon-cyan font-mono text-xs uppercase tracking-[0.3em]">INSTRUCTOR: {quiz.creator.name.toUpperCase()}</p>
+        <h1 className="text-4xl font-black text-white mb-2 text-primary font-bold tracking-tighter uppercase">{quiz.title}</h1>
+        <p className="text-primary font-mono text-xs uppercase tracking-[0.3em]">INSTRUCTOR: {quiz.creator.name.toUpperCase()}</p>
       </header>
 
       <QuizSession quiz={quiz} userId={session?.userId as string} />

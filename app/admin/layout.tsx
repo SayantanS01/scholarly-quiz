@@ -3,17 +3,17 @@ import { logout } from '@/app/actions/auth'
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="flex min-h-screen bg-cyber-black font-mono">
+    <div className="flex min-h-screen bg-background font-mono">
       {/* Sidebar */}
-      <aside className="w-72 bg-black border-r border-neon-cyan/20 fixed inset-y-0 z-50 overflow-hidden">
+      <aside className="w-72 bg-black border-r border-primary fixed inset-y-0 z-50 overflow-hidden">
         {/* Decorative Grid */}
         <div className="absolute inset-0 opacity-5 pointer-events-none bg-[radial-gradient(var(--neon-cyan)_1px,transparent_1px)] [background-size:20px_20px]"></div>
         
         <div className="p-8 mb-8">
-          <Link href="/admin" className="text-2xl font-black neon-text text-neon-cyan tracking-tighter">
+          <Link href="/admin" className="text-2xl font-black text-primary font-bold text-primary tracking-tighter">
             ADMIN_OS
           </Link>
-          <div className="text-[10px] text-neon-magenta font-black mt-1">STATUS: OPERATIONAL</div>
+          <div className="text-[10px] text-primary font-black mt-1">STATUS: OPERATIONAL</div>
         </div>
         
         <nav className="px-6 space-y-4">
@@ -49,7 +49,7 @@ function SidebarLink({ href, label }: { href: string; label: string }) {
   return (
     <Link 
       href={href} 
-      className="block py-3 px-4 border border-transparent hover:border-neon-cyan/50 hover:text-neon-cyan transition-all text-sm font-bold tracking-widest text-slate-500 group"
+      className="block py-3 px-4 border border-transparent hover:border-primary hover:text-primary transition-all text-sm font-bold tracking-widest text-slate-500 group"
     >
       <span className="opacity-0 group-hover:opacity-100 mr-2 transition-opacity">&gt;</span> {label}
     </Link>

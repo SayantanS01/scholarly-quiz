@@ -27,19 +27,19 @@ export default async function TeacherQuizzesPage() {
     <div>
       <header className="flex justify-between items-center mb-12">
         <div>
-          <h1 className="text-4xl font-black text-white mb-2 neon-text-magenta tracking-tighter">MODULE_REPOSITORY</h1>
-          <p className="text-neon-cyan font-mono text-xs uppercase tracking-[0.3em]">Total Created Modules: {quizzes.length}</p>
+          <h1 className="text-4xl font-black text-white mb-2 text-primary font-bold tracking-tighter">MODULE_REPOSITORY</h1>
+          <p className="text-primary font-mono text-xs uppercase tracking-[0.3em]">Total Created Modules: {quizzes.length}</p>
         </div>
-        <Link href="/teacher/quizzes/new" className="btn-cyber border-neon-magenta text-neon-magenta hover:bg-neon-magenta">
+        <Link href="/teacher/quizzes/new" className="btn-primary border-primary text-primary hover:bg-primary/10">
           + NEW_MODULE
         </Link>
       </header>
 
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
         {quizzes.map((quiz: any) => (
-          <div key={quiz.id} className="glass-panel p-8 cyber-border border-neon-magenta/30 flex flex-col group hover:border-neon-magenta transition-all duration-500">
+          <div key={quiz.id} className="card-panel p-8 panel-border border-primary flex flex-col group hover:border-primary transition-all duration-500">
             <div className="flex justify-between items-start mb-6">
-              <span className="text-[10px] font-black text-neon-magenta tracking-widest uppercase opacity-70 group-hover:opacity-100 transition-opacity">
+              <span className="text-[10px] font-black text-primary tracking-widest uppercase opacity-70 group-hover:opacity-100 transition-opacity">
                 // {quiz.category || 'GENERAL_CORE'}
               </span>
               <form action={handleDelete}>
@@ -50,7 +50,7 @@ export default async function TeacherQuizzesPage() {
               </form>
             </div>
             
-            <h3 className="text-2xl font-black text-white mb-4 group-hover:text-neon-magenta transition-colors tracking-tight">
+            <h3 className="text-2xl font-black text-white mb-4 group-hover:text-primary transition-colors tracking-tight">
               {quiz.title}
             </h3>
             <p className="text-slate-500 font-mono text-xs mb-8 line-clamp-2 flex-1 leading-relaxed">
@@ -59,17 +59,17 @@ export default async function TeacherQuizzesPage() {
 
             <div className="flex items-center gap-6 text-[10px] font-black text-slate-600 border-t border-white/5 pt-6 group-hover:text-slate-400 transition-colors">
               <div className="flex items-center gap-2">
-                <span className="text-neon-magenta">#</span> {quiz._count.questions} QUESTIONS
+                <span className="text-primary">#</span> {quiz._count.questions} QUESTIONS
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-neon-cyan">#</span> {quiz._count.attempts} ATTEMPTS
+                <span className="text-primary">#</span> {quiz._count.attempts} ATTEMPTS
               </div>
             </div>
           </div>
         ))}
 
         {quizzes.length === 0 && (
-          <div className="col-span-full py-32 text-center glass-panel cyber-border border-dashed border-slate-800">
+          <div className="col-span-full py-32 text-center card-panel panel-border border-dashed border-slate-800">
             <div className="text-4xl mb-4 opacity-20">NULL_SET</div>
             <p className="text-slate-600 font-mono text-xs uppercase tracking-widest">No educational modules detected in local node.</p>
           </div>

@@ -56,12 +56,12 @@ export default function QuizSession({ quiz, userId }: { quiz: any, userId: strin
           className="bg-neon-cyan h-full transition-all duration-500 shadow-[0_0_15px_var(--neon-cyan)]" 
           style={{ width: `${progress}%` }}
         ></div>
-        <div className="absolute top-4 right-0 text-[10px] font-black text-neon-cyan tracking-[0.3em]">
+        <div className="absolute top-4 right-0 text-[10px] font-black text-primary tracking-[0.3em]">
           SYNC_PROGRESS: {Math.round(progress)}%
         </div>
       </div>
 
-      <div className="glass-panel p-12 cyber-border relative overflow-hidden">
+      <div className="card-panel p-12 panel-border relative overflow-hidden">
         <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-neon-cyan to-transparent opacity-20"></div>
         
         <div className="flex justify-between items-center mb-10">
@@ -81,8 +81,8 @@ export default function QuizSession({ quiz, userId }: { quiz: any, userId: strin
               onClick={() => handleAnswer(opt)}
               className={`text-left p-6 border transition-all duration-300 font-mono text-sm tracking-widest ${
                 answers[question.id] === opt 
-                  ? 'bg-neon-cyan border-neon-cyan text-black font-black scale-[1.01] shadow-[0_0_20px_rgba(0,255,255,0.3)]' 
-                  : 'bg-black/40 border-white/10 text-slate-400 hover:border-neon-cyan/50 hover:text-white'
+                  ? 'bg-neon-cyan border-primary text-black font-black scale-[1.01] shadow-[0_0_20px_rgba(0,255,255,0.3)]' 
+                  : 'bg-card/50 border-white/10 text-slate-400 hover:border-primary hover:text-white'
               }`}
             >
               <span className="inline-block w-6 h-6 border border-current text-center leading-6 mr-6 text-[10px] font-black">
@@ -107,7 +107,7 @@ export default function QuizSession({ quiz, userId }: { quiz: any, userId: strin
           <button
             onClick={finishQuiz}
             disabled={loading || Object.keys(answers).length < quiz.questions.length}
-            className="btn-cyber px-16 py-4 text-sm"
+            className="btn-primary px-16 py-4 text-sm"
           >
             {loading ? '[ UPLOADING... ]' : '[ FINALIZE_SYNC ]'}
           </button>
@@ -115,7 +115,7 @@ export default function QuizSession({ quiz, userId }: { quiz: any, userId: strin
           <button
             onClick={nextQuestion}
             disabled={!answers[question.id]}
-            className="px-12 py-3 border border-neon-cyan text-neon-cyan font-black text-xs tracking-widest hover:bg-neon-cyan hover:text-black transition-all disabled:opacity-20"
+            className="px-12 py-3 border border-primary text-primary font-black text-xs tracking-widest hover:bg-primary/10 hover:text-black transition-all disabled:opacity-20"
           >
             [ NEXT_SEGMENT ]
           </button>

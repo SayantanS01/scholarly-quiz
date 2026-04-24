@@ -48,35 +48,35 @@ export default function QuizForm() {
 
   return (
     <form onSubmit={handleSubmit} className="space-y-12 max-w-4xl">
-      <div className="glass-panel p-8 cyber-border border-neon-magenta/30 space-y-8">
-        <h3 className="text-xl font-black text-white uppercase tracking-tighter neon-text-magenta">MODULE_CONFIG</h3>
+      <div className="card-panel p-8 panel-border border-primary space-y-8">
+        <h3 className="text-xl font-black text-white uppercase tracking-tighter text-primary font-bold">MODULE_CONFIG</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div>
-            <label className="block text-[10px] font-black text-neon-magenta mb-2 uppercase tracking-widest">MODULE_TITLE</label>
+            <label className="block text-[10px] font-black text-primary mb-2 uppercase tracking-widest">MODULE_TITLE</label>
             <input 
               value={title} 
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full bg-black border border-slate-800 p-4 text-white font-mono text-sm focus:border-neon-magenta outline-none transition-all"
+              className="w-full bg-black border border-slate-800 p-4 text-white font-mono text-sm focus:border-primary outline-none transition-all"
               placeholder="e.g. NEURAL_SYNC_PROTOCOL"
               required
             />
           </div>
           <div>
-            <label className="block text-[10px] font-black text-neon-magenta mb-2 uppercase tracking-widest">CLASSIFICATION</label>
+            <label className="block text-[10px] font-black text-primary mb-2 uppercase tracking-widest">CLASSIFICATION</label>
             <input 
               value={category} 
               onChange={(e) => setCategory(e.target.value)}
-              className="w-full bg-black border border-slate-800 p-4 text-white font-mono text-sm focus:border-neon-magenta outline-none transition-all"
+              className="w-full bg-black border border-slate-800 p-4 text-white font-mono text-sm focus:border-primary outline-none transition-all"
               placeholder="e.g. CYBERNETICS"
             />
           </div>
         </div>
         <div>
-          <label className="block text-[10px] font-black text-neon-magenta mb-2 uppercase tracking-widest">SPECIFICATION_DATA</label>
+          <label className="block text-[10px] font-black text-primary mb-2 uppercase tracking-widest">SPECIFICATION_DATA</label>
           <textarea 
             value={description} 
             onChange={(e) => setDescription(e.target.value)}
-            className="w-full bg-black border border-slate-800 p-4 text-white font-mono text-sm focus:border-neon-magenta outline-none h-32 transition-all"
+            className="w-full bg-black border border-slate-800 p-4 text-white font-mono text-sm focus:border-primary outline-none h-32 transition-all"
             placeholder="Technical details for the synchronized unit..."
           />
         </div>
@@ -88,14 +88,14 @@ export default function QuizForm() {
           <button 
             type="button" 
             onClick={addQuestion}
-            className="px-6 py-2 border border-neon-magenta text-neon-magenta font-black text-[10px] tracking-widest hover:bg-neon-magenta hover:text-black transition-all"
+            className="px-6 py-2 border border-primary text-primary font-black text-[10px] tracking-widest hover:bg-primary/10 hover:text-black transition-all"
           >
             [ ADD_SEGMENT ]
           </button>
         </div>
 
         {questions.map((q: any, qIndex: number) => (
-          <div key={qIndex} className="glass-panel p-10 cyber-border border-white/5 space-y-8 relative group hover:border-neon-magenta/40 transition-all">
+          <div key={qIndex} className="card-panel p-10 panel-border border-white/5 space-y-8 relative group hover:border-primary transition-all">
             <button 
               type="button" 
               onClick={() => removeQuestion(qIndex)}
@@ -109,7 +109,7 @@ export default function QuizForm() {
               <input 
                 value={q.text} 
                 onChange={(e) => updateQuestion(qIndex, 'text', e.target.value)}
-                className="w-full bg-white/5 border border-white/10 p-4 text-white font-mono text-sm focus:border-neon-magenta outline-none transition-all"
+                className="w-full bg-white/5 border border-white/10 p-4 text-white font-mono text-sm focus:border-primary outline-none transition-all"
                 placeholder="Enter query string..."
                 required
               />
@@ -127,12 +127,12 @@ export default function QuizForm() {
                       className="absolute w-full h-full opacity-0 cursor-pointer z-10"
                       required
                     />
-                    <div className={`w-4 h-4 border-2 transition-all ${q.correctAnswer === opt ? 'bg-neon-magenta border-neon-magenta scale-110 shadow-[0_0_10px_var(--neon-magenta)]' : 'border-slate-700 bg-transparent'}`}></div>
+                    <div className={`w-4 h-4 border-2 transition-all ${q.correctAnswer === opt ? 'bg-neon-magenta border-primary scale-110 shadow-[0_0_10px_var(--neon-magenta)]' : 'border-slate-700 bg-transparent'}`}></div>
                   </div>
                   <input 
                     value={opt} 
                     onChange={(e) => updateOption(qIndex, oIndex, e.target.value)}
-                    className="flex-1 bg-white/5 border border-white/10 p-4 text-white font-mono text-xs focus:border-neon-magenta outline-none transition-all"
+                    className="flex-1 bg-white/5 border border-white/10 p-4 text-white font-mono text-xs focus:border-primary outline-none transition-all"
                     placeholder={`DATA_POINT_${oIndex + 1}`}
                     required
                   />
@@ -147,7 +147,7 @@ export default function QuizForm() {
       <button 
         type="submit" 
         disabled={loading}
-        className="btn-cyber border-neon-magenta text-neon-magenta hover:bg-neon-magenta w-full py-6 text-sm"
+        className="btn-primary border-primary text-primary hover:bg-primary/10 w-full py-6 text-sm"
       >
         {loading ? '[ UPLOADING_MODULE... ]' : '[ DEPLOY_SYNC_MODULE ]'}
       </button>
