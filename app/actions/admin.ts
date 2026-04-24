@@ -23,9 +23,11 @@ export async function generateTeacherToken() {
   return token
 }
 
+import { Role } from '@prisma/client'
+
 export async function updateRole(formData: FormData) {
   const userId = formData.get('userId') as string
-  const role = formData.get('role') as any
+  const role = formData.get('role') as Role
   await prisma.user.update({
     where: { id: userId },
     data: { role },
