@@ -19,10 +19,10 @@ export function ThemeSwitcher() {
 
   const themes = [
     { name: "dark", color: "#09090b", border: "#27272a" },
-    { name: "red", color: "#fef2f2", border: "#dc2626" },
-    { name: "yellow", color: "#fefce8", border: "#ca8a04" },
-    { name: "green", color: "#f0fdf4", border: "#16a34a" },
-    { name: "blue", color: "#eff6ff", border: "#2563eb" },
+    { name: "red", color: "#09090b", border: "#ff003c" },
+    { name: "yellow", color: "#09090b", border: "#ffcc00" },
+    { name: "green", color: "#09090b", border: "#00e676" },
+    { name: "blue", color: "#09090b", border: "#0066ff" },
   ];
 
   return (
