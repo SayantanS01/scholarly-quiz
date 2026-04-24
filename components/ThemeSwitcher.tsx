@@ -18,7 +18,6 @@ export function ThemeSwitcher() {
   }
 
   const themes = [
-    { name: "light", color: "#ffffff", border: "#e4e4e7" },
     { name: "dark", color: "#09090b", border: "#27272a" },
     { name: "red", color: "#fef2f2", border: "#dc2626" },
     { name: "yellow", color: "#fefce8", border: "#ca8a04" },

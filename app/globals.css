@@ -12,18 +12,7 @@
 }
 
 :root {
-  /* Light Theme (White - Default) */
-  --background: #ffffff;
-  --foreground: #09090b;
-  --card: #ffffff;
-  --card-foreground: #09090b;
-  --border: #e4e4e7;
-  --primary: #18181b;
-  --primary-foreground: #fafafa;
-}
-
-[data-theme="dark"] {
-  /* Black Theme */
+  /* Dark Theme (Default) */
   --background: #09090b;
   --foreground: #fafafa;
   --card: #09090b;
