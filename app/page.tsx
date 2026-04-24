@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { BookIcon3D } from '@/components/BookIcon3D'
 
 export default function Home() {
   return (
@@ -11,7 +12,11 @@ export default function Home() {
           // ACADEMIC_SYSTEM_V4.0
         </div>
         
-        <h1 className="text-7xl md:text-9xl font-black mb-8 tracking-tighter text-white">
+        <div className="flex flex-col items-center justify-center mb-6">
+          <BookIcon3D />
+        </div>
+
+        <h1 className="text-7xl md:text-9xl font-black mb-8 tracking-tighter text-foreground">
           <span className="text-primary font-bold text-primary">SCHOLARLY</span>
           <br />
           <span className="text-primary font-bold text-primary">QUIZ</span>
