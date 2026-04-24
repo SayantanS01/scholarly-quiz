@@ -1,0 +1,75 @@
+datasource db {
+  provider = "postgresql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum Role {
+  ADMIN
+  TEACHER
+  STUDENT
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  role      Role     @default(STUDENT)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  createdQuizzes     Quiz[]       @relation("CreatedBy")
+  attempts           Attempt[]
+  assignments        Assignment[] @relation("AssignedTo")
+}
+
+model Quiz {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  category    String?
+  creatorId   String
+  creator     User     @relation("CreatedBy", fields: [creatorId], references: [id])
+  isLocked    Boolean  @default(true) // Whether students can review their results
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  questions   Question[]
+  attempts    Attempt[]
+  assignments Assignment[]
+}
+
+model Question {
+  id            String   @id @default(cuid())
+  text          String
+  type          String   @default("MCQ")
+  options       String   // JSON stringified array
+  correctAnswer String
+  quizId        String
+  quiz          Quiz     @relation(fields: [quizId], references: [id], onDelete: Cascade)
+}
+
+model Attempt {
+  id          String   @id @default(cuid())
+  studentId   String
+  student     User     @relation(fields: [studentId], references: [id])
+  quizId      String
+  quiz        Quiz     @relation(fields: [quizId], references: [id])
+  score       Float
+  answers     String   // JSON stringified user answers
+  status      String   @default("COMPLETED") // COMPLETED, PENDING_REVIEW
+  startedAt   DateTime @default(now())
+  completedAt DateTime @default(now())
+}
+
+model Assignment {
+  id        String   @id @default(cuid())
+  quizId    String
+  quiz      Quiz     @relation(fields: [quizId], references: [id])
+  dueDate   DateTime?
+  students  User[]   @relation("AssignedTo")
+  createdAt DateTime @default(now())
+}

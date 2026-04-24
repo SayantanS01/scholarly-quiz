@@ -1,0 +1,52 @@
+import { NextResponse } from 'next/server';
+import type { NextRequest } from 'next/server';
+import { decrypt } from '@/lib/auth';
+
+const protectedRoutes = ['/dashboard', '/create', '/admin', '/practice', '/quiz'];
+
+export async function middleware(request: NextRequest) {
+  const currentPath = request.nextUrl.pathname;
+  
+  // Check if current route matches any protected prefix
+  const isProtectedRoute = protectedRoutes.some(route => currentPath.startsWith(route));
+  
+  if (isProtectedRoute) {
+    const sessionCookie = request.cookies.get('session')?.value;
+    
+    if (!sessionCookie) {
+      return NextResponse.redirect(new URL('/login', request.url));
+    }
+    
+    // Validate session
+    const payload = await decrypt(sessionCookie);
+    if (!payload) {
+      return NextResponse.redirect(new URL('/login', request.url));
+    }
+
+    // Role-based Access Logic
+    if (currentPath.startsWith('/admin') && payload.role !== 'ADMIN') {
+      return NextResponse.redirect(new URL('/dashboard', request.url));
+    }
+
+    if (currentPath.startsWith('/create') && !payload) {
+      return NextResponse.redirect(new URL('/login', request.url)); 
+    }
+  }
+  
+  // Redirect logged-in users away from auth pages
+  if (currentPath === '/login' || currentPath === '/signup') {
+    const sessionCookie = request.cookies.get('session')?.value;
+    if (sessionCookie) {
+      const payload = await decrypt(sessionCookie);
+      if (payload) {
+        return NextResponse.redirect(new URL('/dashboard', request.url));
+      }
+    }
+  }
+
+  return NextResponse.next();
+}
+
+export const config = {
+  matcher: ['/((?!api|_next/static|_next/image|.*\\.png$).*)'],
+};

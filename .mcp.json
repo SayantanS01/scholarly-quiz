@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "scholarly-quiz Docs": {
+      "command": "npx",
+      "args": [
+        "mcp-remote",
+        "https://gitmcp.io/SayantanS01/scholarly-quiz"
+      ]
+    },
+    "next-devtools": {
+      "command": "npx",
+      "args": ["-y", "next-devtools-mcp@latest"]
+    }
+  }
+}
